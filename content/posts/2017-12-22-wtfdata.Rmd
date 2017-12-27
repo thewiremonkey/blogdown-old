@@ -34,10 +34,10 @@ Before we go any further, we need to transform the names to valid, R-friendly va
 head(names(MetObjects)<-make.names(tolower(names(MetObjects))),6)
 ```
 
-Now we can take a peek at what the data includes using dplyr's glimpse()
+Now we can take a peek at what the data includes using dplyr's glimpse(), just looking at the first 10 columns to save space
 
 ```{r}
-glimpse(MetObjects,width = 75)
+glimpse(MetObjects[,1:10],width = 50)
 ```
 
 There are quite a few NAs in several of the columns, so the next step would be to check the sparsity of each column and decide whether we can drop it.  We can do this by adding up the null entries with sum(is.na()) and dividing it by the number of records.
@@ -61,6 +61,7 @@ And now a plot...Which departments are the largest? While we're at it, let's see
 
 ```{r}
 library(forcats)
+pal<-brewer.pal(2, "RdBu")
 mo_complete %>%
   group_by(department, is.public.domain) %>% 
   count() %>% 
@@ -68,6 +69,7 @@ mo_complete %>%
   geom_col(aes(fill=is.public.domain))+
   labs(x="", y="number of objects", fill="is in\npublic domain")+
   theme_bw()+
+  scale_fill_brewer(type = "qual",palette = 2,direction = -1)+
   coord_flip()
 ```
 
@@ -111,12 +113,12 @@ tidy_medium<-d_and_p %>%
   ungroup() %>% 
   # group_by(department) %>% 
   unnest_tokens(word, medium) %>% 
-  mutate(word = wordStem(word)) %>% 
+  # mutate(word = wordStem(word)) %>% 
   group_by(word) %>% 
   summarise(freq=n()) %>%
   ungroup() %>% 
   anti_join(stop_words) %>% 
-  filter(!word %in% c("color", "black", "brown", "white", "green", "dark", "light", "commerci")) %>% 
+  filter(!word %in% c("color", "black", "brown", "white", "green", "dark", "light", "commercial")) %>% 
     arrange(desc(freq))
 
 
