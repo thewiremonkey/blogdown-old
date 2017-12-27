@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 baseurl = "/"
 title = "The Wire Monkey Data Science"
 copyright = "Copyright &copy; 2017 - Author Name"
@@ -23,5 +22,3 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [params]
     tagline = "Trying to find my place in the Tidyverse"
-
->>>>>>> 0dc16fc5e8e8e58b1ad7d613bf7702ca80c51fdf
