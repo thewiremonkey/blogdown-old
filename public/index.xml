@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Kiera</title>
+    <title>The Wire Monkey Data Science</title>
     <link>/</link>
-    <description>Recent content on Kiera</description>
+    <description>Recent content on The Wire Monkey Data Science</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright &amp;copy; 2017 - Author Name</copyright>
     <lastBuildDate>Wed, 09 Apr 2014 00:00:00 +0000</lastBuildDate>
@@ -20,6 +20,16 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Cleaning the Metropolitan Museum of Art</title>
+      <link>/posts/wtfdata/</link>
+      <pubDate>Tue, 26 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/wtfdata/</guid>
+      <description>Recently, The Metropolitan Museum of Art made its collection database publicly available. The collection spans over 5,000 years and has nearly a half-million records. Wonderful! Exciting!
+43 Variables, almost all of them text.</description>
     </item>
     
     <item>

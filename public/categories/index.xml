@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on Kiera</title>
+    <title>Categories on The Wire Monkey Data Science</title>
     <link>/categories/</link>
-    <description>Recent content in Categories on Kiera</description>
+    <description>Recent content in Categories on The Wire Monkey Data Science</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright &amp;copy; 2017 - Author Name</copyright>
     
@@ -11,11 +11,29 @@
     
     
     <item>
+      <title>Data Cleaning</title>
+      <link>/categories/data-cleaning/</link>
+      <pubDate>Tue, 26 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/data-cleaning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Development</title>
       <link>/categories/development/</link>
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
       <guid>/categories/development/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Exploratory Analysis</title>
+      <link>/categories/exploratory-analysis/</link>
+      <pubDate>Tue, 26 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/exploratory-analysis/</guid>
       <description></description>
     </item>
     
