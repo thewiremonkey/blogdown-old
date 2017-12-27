@@ -1,5 +1,5 @@
-baseurl = "https://www.example.org/"
-title = "Kiera"
+baseurl = "/"
+title = "The Wire Monkey Data Science"
 copyright = "Copyright &copy; 2017 - Author Name"
 canonifyurls = true
 theme = "hugo-kiera"
@@ -9,17 +9,18 @@ paginate = 3
 summaryLength = 30
 enableEmoji = true
 pygmentsCodeFences = true
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [author]
-    name = ""
-    github = ""
+    name = "Alyssa"
+    github = "http://github.com/thewiremonkey"
     gitlab = ""
     linkedin = ""
     facebook = ""
-    twitter = ""
+    twitter = "http://twitter.com/WireMonkey"
     instagram = ""
 
 [params]
-    tagline = "A Hugo theme for creative and technical writing"
+    tagline = "Trying to find my place in the Tidyverse"
 
 
