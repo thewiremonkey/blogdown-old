@@ -1,112 +1,15 @@
-<!doctype html>
-
-<html lang="en">
-
-<head>
-  <title>The Wire Monkey Data Science</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="The HTML5 Herald" />
-  <meta name="author" content="Alyssa" />
-  <meta name="generator" content="Hugo 0.31.1" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
-  <link rel="stylesheet" type="text/css" href="/css/styles.css" />
-</head>
-
-<body>
-  <div id="container">
-    <header>
-      <h1>
-                <a href="/">The Wire Monkey Data Science</a>
-            </h1>
-
-      <ul id="social-media">
-        
-        <li><a href="https://twitter.com/http://twitter.com/WireMonkey"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-          
-        <li><a href="https://github.com/http://github.com/thewiremonkey"><i class="fa fa-github fa-lg" aria-hidden="true"></i></a></li>
-           
-      </ul>
-      
-      <p><em>Trying to find my place in the Tidyverse</em></p>
-      
-    </header>
-
-    
-<nav>
-    <ul>
-        
-        <li>
-            <a class="" href="/posts/">
-                <i class="fa-li fa  fa-lg"></i><span>Posts</span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="" href="/about/">
-                <i class="fa-li fa  fa-lg"></i><span>About Hugo</span>
-            </a>
-        </li>
-        
-    </ul>
-</nav>
-
-    <main>
+---
+title: Cleaning the Metropolitan Museum of Art
+author: ~
+date: '2017-12-26'
+slug: cleaning-the-metropolitan-museum-of-art
+categories: []
+tags: []
+---
 
 
 
-
-<article>
-
-    <h1>Cleaning the Metropolitan Museum of Art</h1>
-
-    
-        <aside>
-    <ul>
-        <li>
-            <time class="post-date" datetime="2017-12-26T00:00:00Z">Dec 26, 2017</time>
-        </li>
-        
-        
-        <li>
-            Categories: 
-            <em>
-                
-                    
-                    <a href="/categories/data-cleaning/">data cleaning</a>
-                
-                    , 
-                    <a href="/categories/exploratory-analysis/">exploratory analysis</a>
-                
-            </em>
-        </li>
-        
-
-        
-        <li>
-            <em>
-                
-                    
-                    <a href="/tags/cleaning/">#cleaning</a>
-                
-                    , 
-                    <a href="/tags/wtfdata/">#wtfdata</a>
-                
-                    , 
-                    <a href="/tags/legacy-data/">#legacy data</a>
-                
-            </em>
-        </li>
-        
-
-        <li>5 min read</li>
-    </ul>
-</aside>
-    
-
-    <p>Recently, <a href="http://metmuseum.org">The Metropolitan Museum of Art</a> made its collection database publicly available. The collection spans over 5,000 years and has nearly a half-million records. Wonderful! Exciting!</p>
+<p>Recently, <a href="http://metmuseum.org">The Metropolitan Museum of Art</a> made its collection database publicly available. The collection spans over 5,000 years and has nearly a half-million records. Wonderful! Exciting!</p>
 <p>43 Variables, almost all of them text.</p>
 <pre class="r"><code>library(tidyverse)
 library(RColorBrewer)
@@ -186,7 +89,7 @@ pal&lt;-brewer.pal(2, &quot;RdBu&quot;)</code></pre>
   theme_bw()+
   scale_fill_brewer(type = &quot;qual&quot;,palette = 2,direction = -1)+
   coord_flip()</code></pre>
-<p><img src="/posts/2017-12-22-wtfdata_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/post/2017-12-26-cleaning-the-metropolitan-museum-of-art_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Drawings and Prints is by far the largest department, containing a full 35% of the records in the MetObjects table.</p>
 <p>Let’s explore Drawings and Prints a bit more. First, let’s find out if there are any additional complete variables when we filter on department==“Drawings and Prints”</p>
 <pre class="r"><code>d_and_p_complete&lt;-mo_complete %&gt;% filter(department == &quot;Drawings and Prints&quot;) %&gt;% distinct() %&gt;% 
@@ -251,32 +154,4 @@ head(tidy_medium, 10)</code></pre>
 
 tidy_medium %&gt;% 
   with(wordcloud(words = word, freq=freq, max.words=50, colors = brewer.pal(4, &quot;RdBu&quot;)))</code></pre>
-<p><img src="/posts/2017-12-22-wtfdata_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-
-
-</article>
-
-
-<section class="post-nav">
-    <ul>
-        
-        
-    </ul>
-</section>
-    
-
-
-
-
-
-</main>
-    <footer>
-        <h6>Copyright &copy; 2017 - Author Name | 
-            Rendered by <a href="https://gohugo.io" title="Hugo">Hugo</a> |
-            <a href="/index.xml">Subscribe</a></h6>
-    </footer>
-</div>
-<script src="/js/scripts.js"></script>
-</body>
-
-</html>
+<p><img src="/post/2017-12-26-cleaning-the-metropolitan-museum-of-art_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>

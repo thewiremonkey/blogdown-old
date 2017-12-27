@@ -70,35 +70,7 @@
         </li>
         
         
-        <li>
-            Categories: 
-            <em>
-                
-                    
-                    <a href="/categories/data-cleaning/">data cleaning</a>
-                
-                    , 
-                    <a href="/categories/exploratory-analysis/">exploratory analysis</a>
-                
-            </em>
-        </li>
-        
 
-        
-        <li>
-            <em>
-                
-                    
-                    <a href="/tags/cleaning/">#cleaning</a>
-                
-                    , 
-                    <a href="/tags/wtfdata/">#wtfdata</a>
-                
-                    , 
-                    <a href="/tags/legacy-data/">#legacy data</a>
-                
-            </em>
-        </li>
         
 
         <li>5 min read</li>
@@ -186,7 +158,7 @@ pal&lt;-brewer.pal(2, &quot;RdBu&quot;)</code></pre>
   theme_bw()+
   scale_fill_brewer(type = &quot;qual&quot;,palette = 2,direction = -1)+
   coord_flip()</code></pre>
-<p><img src="/posts/2017-12-22-wtfdata_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/post/2017-12-26-cleaning-the-metropolitan-museum-of-art_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Drawings and Prints is by far the largest department, containing a full 35% of the records in the MetObjects table.</p>
 <p>Let’s explore Drawings and Prints a bit more. First, let’s find out if there are any additional complete variables when we filter on department==“Drawings and Prints”</p>
 <pre class="r"><code>d_and_p_complete&lt;-mo_complete %&gt;% filter(department == &quot;Drawings and Prints&quot;) %&gt;% distinct() %&gt;% 
@@ -251,7 +223,7 @@ head(tidy_medium, 10)</code></pre>
 
 tidy_medium %&gt;% 
   with(wordcloud(words = word, freq=freq, max.words=50, colors = brewer.pal(4, &quot;RdBu&quot;)))</code></pre>
-<p><img src="/posts/2017-12-22-wtfdata_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/post/2017-12-26-cleaning-the-metropolitan-museum-of-art_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 
 
 </article>
@@ -259,6 +231,10 @@ tidy_medium %&gt;%
 
 <section class="post-nav">
     <ul>
+        
+        <li>
+            <a href="/post/2015-07-23-r-rmarkdown/"><i class="fa fa-chevron-circle-left"></i> Hello R Markdown</a>
+        </li>
         
         
     </ul>
