@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 baseurl = "/"
 title = "The Wire Monkey Data Science"
 copyright = "Copyright &copy; 2017 - Author Name"
@@ -24,3 +25,31 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     tagline = "Trying to find my place in the Tidyverse"
 
 
+=======
+baseurl = "/"
+title = "The Wire Monkey Data Science"
+copyright = "Copyright &copy; 2017 - Author Name"
+canonifyurls = true
+theme = "hugo-kiera"
+
+paginate = 3
+
+summaryLength = 30
+enableEmoji = true
+pygmentsCodeFences = true
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$", "\\.Rproj$"]
+
+[author]
+    name = "Alyssa"
+    github = "http://github.com/thewiremonkey"
+    gitlab = ""
+    linkedin = ""
+    facebook = ""
+    twitter = "http://twitter.com/WireMonkey"
+    instagram = ""
+
+[params]
+    tagline = "Trying to find my place in the Tidyverse"
+
+
+>>>>>>> 0dc16fc5e8e8e58b1ad7d613bf7702ca80c51fdf
