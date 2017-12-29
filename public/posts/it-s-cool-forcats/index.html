@@ -1,0 +1,159 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <title>The Wire Monkey Data Science</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The HTML5 Herald" />
+  <meta name="author" content="Alyssa" />
+  <meta name="generator" content="Hugo 0.31.1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+</head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="/">The Wire Monkey Data Science</a>
+            </h1>
+
+      <ul id="social-media">
+        
+        <li><a href="https://twitter.com/http://twitter.com/WireMonkey"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+          
+        <li><a href="https://github.com/http://github.com/thewiremonkey"><i class="fa fa-github fa-lg" aria-hidden="true"></i></a></li>
+           
+      </ul>
+      
+      <p><em>Trying to find my place in the Tidyverse</em></p>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+        <li>
+            <a class="" href="/posts/">
+                <i class="fa-li fa  fa-lg"></i><span>Posts</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="/about/">
+                <i class="fa-li fa  fa-lg"></i><span>About Hugo</span>
+            </a>
+        </li>
+        
+    </ul>
+</nav>
+
+    <main>
+
+
+
+
+<article>
+
+    <h1>It&#39;s Cool Forcats</h1>
+
+    
+        <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2017-12-27T00:00:00Z">Dec 27, 2017</time>
+        </li>
+        
+        
+        <li>
+            Categories: 
+            <em>
+                
+                    
+                    <a href="/categories/libraries/">libraries</a>
+                
+                    , 
+                    <a href="/categories/factors/">factors</a>
+                
+                    , 
+                    <a href="/categories/ggplot/">ggplot</a>
+                
+            </em>
+        </li>
+        
+
+        
+
+        <li>1 min read</li>
+    </ul>
+</aside>
+    
+
+    <div id="factors" class="section level2">
+<h2>Factors</h2>
+<p>When to refactor the data</p>
+<p>When to refactor within a plot</p>
+<pre class="r"><code>options(stringsAsFactors = FALSE)
+library(tidyverse)
+file_url&lt;-&quot;http://media.githubusercontent.com/media/metmuseum/openaccess/master/MetObjects.csv&quot;
+MetObjects&lt;-read_csv(file_url, trim_ws = T)
+names(MetObjects)&lt;-make.names(tolower(names(MetObjects)))
+unique(MetObjects$department)</code></pre>
+<pre><code>##  [1] &quot;American Decorative Arts&quot;                 
+##  [2] &quot;American Paintings and Sculpture&quot;         
+##  [3] &quot;European Sculpture and Decorative Arts&quot;   
+##  [4] &quot;Modern and Contemporary Art&quot;              
+##  [5] &quot;Arms and Armor&quot;                           
+##  [6] &quot;Medieval Art&quot;                             
+##  [7] &quot;Asian Art&quot;                                
+##  [8] &quot;Costume Institute&quot;                        
+##  [9] &quot;Islamic Art&quot;                              
+## [10] &quot;Arts of Africa, Oceania, and the Americas&quot;
+## [11] &quot;Drawings and Prints&quot;                      
+## [12] &quot;Greek and Roman Art&quot;                      
+## [13] &quot;Photographs&quot;                              
+## [14] &quot;Ancient Near Eastern Art&quot;                 
+## [15] &quot;European Paintings&quot;                       
+## [16] &quot;Robert Lehman Collection&quot;                 
+## [17] &quot;The Cloisters&quot;                            
+## [18] &quot;Musical Instruments&quot;                      
+## [19] &quot;Egyptian Art&quot;                             
+## [20] &quot;The Libraries&quot;</code></pre>
+</div>
+
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        <li>
+            <a href="/posts/wtfdata/"><i class="fa fa-chevron-circle-left"></i> Cleaning the Metropolitan Museum of Art</a>
+        </li>
+        
+        
+    </ul>
+</section>
+    
+
+
+
+
+
+</main>
+    <footer>
+        <h6>Copyright &copy; 2017 - Author Name | 
+            Rendered by <a href="https://gohugo.io" title="Hugo">Hugo</a> |
+            <a href="/index.xml">Subscribe</a></h6>
+    </footer>
+</div>
+<script src="/js/scripts.js"></script>
+</body>
+
+</html>

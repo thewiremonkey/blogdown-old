@@ -1,0 +1,45 @@
+---
+title: It's Cool Forcats
+author: ~
+date: '2017-12-27'
+slug: it-s-cool-forcats
+categories:
+  - libraries
+  - factors
+  - ggplot
+tags: []
+---
+
+
+
+<div id="factors" class="section level2">
+<h2>Factors</h2>
+<p>When to refactor the data</p>
+<p>When to refactor within a plot</p>
+<pre class="r"><code>options(stringsAsFactors = FALSE)
+library(tidyverse)
+file_url&lt;-&quot;http://media.githubusercontent.com/media/metmuseum/openaccess/master/MetObjects.csv&quot;
+MetObjects&lt;-read_csv(file_url, trim_ws = T)
+names(MetObjects)&lt;-make.names(tolower(names(MetObjects)))
+unique(MetObjects$department)</code></pre>
+<pre><code>##  [1] &quot;American Decorative Arts&quot;                 
+##  [2] &quot;American Paintings and Sculpture&quot;         
+##  [3] &quot;European Sculpture and Decorative Arts&quot;   
+##  [4] &quot;Modern and Contemporary Art&quot;              
+##  [5] &quot;Arms and Armor&quot;                           
+##  [6] &quot;Medieval Art&quot;                             
+##  [7] &quot;Asian Art&quot;                                
+##  [8] &quot;Costume Institute&quot;                        
+##  [9] &quot;Islamic Art&quot;                              
+## [10] &quot;Arts of Africa, Oceania, and the Americas&quot;
+## [11] &quot;Drawings and Prints&quot;                      
+## [12] &quot;Greek and Roman Art&quot;                      
+## [13] &quot;Photographs&quot;                              
+## [14] &quot;Ancient Near Eastern Art&quot;                 
+## [15] &quot;European Paintings&quot;                       
+## [16] &quot;Robert Lehman Collection&quot;                 
+## [17] &quot;The Cloisters&quot;                            
+## [18] &quot;Musical Instruments&quot;                      
+## [19] &quot;Egyptian Art&quot;                             
+## [20] &quot;The Libraries&quot;</code></pre>
+</div>
