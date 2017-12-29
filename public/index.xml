@@ -23,23 +23,42 @@ It makes use of a variety of open source projects including:
     </item>
     
     <item>
+      <title>It&#39;s Cool Forcats</title>
+      <link>/posts/it-s-cool-forcats/</link>
+      <pubDate>Wed, 27 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/it-s-cool-forcats/</guid>
+      <description>FactorsWhen to refactor the data
+When to refactor within a plot
+options(stringsAsFactors = FALSE)library(tidyverse)file_url&amp;lt;-&amp;quot;http://media.githubusercontent.com/media/metmuseum/openaccess/master/MetObjects.csv&amp;quot;MetObjects&amp;lt;-read_csv(file_url, trim_ws = T)names(MetObjects)&amp;lt;-make.names(tolower(names(MetObjects)))unique(MetObjects$department)## [1] &amp;quot;American Decorative Arts&amp;quot; ## [2] &amp;quot;American Paintings and Sculpture&amp;quot; ## [3] &amp;quot;European Sculpture and Decorative Arts&amp;quot; ## [4] &amp;quot;Modern and Contemporary Art&amp;quot; ## [5] &amp;quot;Arms and Armor&amp;quot; ## [6] &amp;quot;Medieval Art&amp;quot; ## [7] &amp;quot;Asian Art&amp;quot; ## [8] &amp;quot;Costume Institute&amp;quot; ## [9] &amp;quot;Islamic Art&amp;quot; ## [10] &amp;quot;Arts of Africa, Oceania, and the Americas&amp;quot;## [11] &amp;quot;Drawings and Prints&amp;quot; ## [12] &amp;quot;Greek and Roman Art&amp;quot; ## [13] &amp;quot;Photographs&amp;quot; ## [14] &amp;quot;Ancient Near Eastern Art&amp;quot; ## [15] &amp;quot;European Paintings&amp;quot; ## [16] &amp;quot;Robert Lehman Collection&amp;quot; ## [17] &amp;quot;The Cloisters&amp;quot; ## [18] &amp;quot;Musical Instruments&amp;quot; ## [19] &amp;quot;Egyptian Art&amp;quot; ## [20] &amp;quot;The Libraries&amp;quot;</description>
+    </item>
+    
+    <item>
       <title>Cleaning the Metropolitan Museum of Art</title>
-      <link>/post/cleaning-the-metropolitan-museum-of-art/</link>
+      <link>/posts/cleaning-the-metropolitan-museum-of-art/</link>
       <pubDate>Tue, 26 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/cleaning-the-metropolitan-museum-of-art/</guid>
+      <guid>/posts/cleaning-the-metropolitan-museum-of-art/</guid>
       <description>Recently, The Metropolitan Museum of Art made its collection database publicly available. The collection spans over 5,000 years and has nearly a half-million records. Wonderful! Exciting!
 43 Variables, almost all of them text.</description>
     </item>
     
     <item>
-      <title>Cleaning the Metropolitan Museum of Art</title>
-      <link>/posts/wtfdata/</link>
-      <pubDate>Tue, 26 Dec 2017 00:00:00 +0000</pubDate>
+      <title>Style Guide</title>
+      <link>/posts/style-guide/</link>
+      <pubDate>Tue, 14 Nov 2017 10:57:55 -0500</pubDate>
       
-      <guid>/posts/wtfdata/</guid>
-      <description>Recently, The Metropolitan Museum of Art made its collection database publicly available. The collection spans over 5,000 years and has nearly a half-million records. Wonderful! Exciting!
-43 Variables, almost all of them text.</description>
+      <guid>/posts/style-guide/</guid>
+      <description>Headings Heading 1 Heading 2 Heading 3 Heading 4 Heading 5 Heading 6 Headings with Text Heading 1 Lorem ipsum dolor sit amet, adipiscing elit. Nullam dignissim convallis est. Quisque aliquam.</description>
+    </item>
+    
+    <item>
+      <title>Image Style Guide</title>
+      <link>/posts/image-content/</link>
+      <pubDate>Tue, 14 Nov 2017 08:08:17 -0500</pubDate>
+      
+      <guid>/posts/image-content/</guid>
+      <description>Veniam est eu adipisicing reprehenderit do sit sint elit sint. Tempor laborum ut dolore aliqua. Commodo eu qui sint magna veniam laborum. Ad cupidatat do proident ex veniam amet Lorem. Officia laboris aute fugiat id consequat culpa ullamco labore ea amet ad.</description>
     </item>
     
     <item>
@@ -49,6 +68,43 @@ It makes use of a variety of open source projects including:
       
       <guid>/post/2015-07-23-r-rmarkdown/</guid>
       <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.</description>
+    </item>
+    
+    <item>
+      <title>Creating a New Theme</title>
+      <link>/posts/creating-a-new-theme/</link>
+      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/creating-a-new-theme/</guid>
+      <description>Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content.</description>
+    </item>
+    
+    <item>
+      <title>(Hu)go Template Primer</title>
+      <link>/posts/goisforlovers/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/goisforlovers/</guid>
+      <description>Hugo uses the excellent go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website.</description>
+    </item>
+    
+    <item>
+      <title>Getting Started with Hugo</title>
+      <link>/posts/hugoisforlovers/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/hugoisforlovers/</guid>
+      <description>Step 1. Install Hugo Goto hugo releases and download the appropriate version for your os and architecture.
+Save it somewhere specific as we will be using it in the next step.</description>
+    </item>
+    
+    <item>
+      <title>Migrate to Hugo from Jekyll</title>
+      <link>/posts/migrate-from-jekyll/</link>
+      <pubDate>Mon, 10 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/migrate-from-jekyll/</guid>
+      <description>Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static.</description>
     </item>
     
   </channel>

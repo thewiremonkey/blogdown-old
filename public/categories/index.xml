@@ -11,11 +11,20 @@
     
     
     <item>
-      <title>Data Cleaning</title>
-      <link>/categories/data-cleaning/</link>
+      <title>Cleaning</title>
+      <link>/categories/cleaning/</link>
       <pubDate>Tue, 26 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>/categories/data-cleaning/</guid>
+      <guid>/categories/cleaning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Development</title>
+      <link>/categories/development/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/development/</guid>
       <description></description>
     </item>
     
@@ -25,6 +34,42 @@
       <pubDate>Tue, 26 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>/categories/exploratory-analysis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Factors</title>
+      <link>/categories/factors/</link>
+      <pubDate>Wed, 27 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/factors/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ggplot</title>
+      <link>/categories/ggplot/</link>
+      <pubDate>Wed, 27 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/ggplot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Golang</title>
+      <link>/categories/golang/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Libraries</title>
+      <link>/categories/libraries/</link>
+      <pubDate>Wed, 27 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/libraries/</guid>
       <description></description>
     </item>
     

@@ -1,0 +1,27 @@
+---
+title: It's Cool Forcats
+author: ~
+date: '2017-12-27'
+slug: it-s-cool-forcats
+categories:
+  - libraries
+  - factors
+  - ggplot
+tags: []
+---
+
+##Factors
+
+
+When to refactor the data
+
+When to refactor within a plot
+```{r message=FALSE, warning=FALSE}
+options(stringsAsFactors = FALSE)
+library(tidyverse)
+file_url<-"http://media.githubusercontent.com/media/metmuseum/openaccess/master/MetObjects.csv"
+MetObjects<-read_csv(file_url, trim_ws = T)
+names(MetObjects)<-make.names(tolower(names(MetObjects)))
+unique(MetObjects$department)
+```
+

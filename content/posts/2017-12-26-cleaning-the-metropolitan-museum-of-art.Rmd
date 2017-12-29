@@ -1,0 +1,138 @@
+---
+title: Cleaning the Metropolitan Museum of Art
+author: ~
+date: '2017-12-26'
+slug: cleaning-the-metropolitan-museum-of-art
+categories: [cleaning, exploratory analysis]
+tags: []
+---
+
+
+Recently, [The Metropolitan Museum of Art](http://metmuseum.org)
+ made its collection database publicly available. The collection spans over 5,000 years and has nearly a half-million records. Wonderful!  Exciting!
+ 
+43 Variables, almost all of them text.
+ 
+```{r warning=FALSE, message=FALSE}
+library(tidyverse)
+library(RColorBrewer)
+
+#read in the 227 MB file
+#trim the white space to avoid weird UTF/ASCII characters
+file_url<-"http://media.githubusercontent.com/media/metmuseum/openaccess/master/MetObjects.csv"
+MetObjects<-read_csv(file_url, trim_ws = T)
+
+#display the column names
+names(MetObjects)
+
+```
+
+`r ncol(MetObjects)` variables with "spacey" names. 
+
+Before we go any further, we need to transform the names to valid, R-friendly variable names. I prefer to use lowercase for column names.
+
+```{r}
+#use base "make.names" function on lowercase column names
+head(names(MetObjects)<-make.names(tolower(names(MetObjects))),6)
+```
+
+Now we can take a peek at what the data includes using dplyr's glimpse(), just looking at the first 10 columns to save space
+
+```{r}
+glimpse(MetObjects[,1:10],width = 50)
+```
+
+There are quite a few NAs in several of the columns, so the next step would be to check the sparsity of each column and decide whether we can drop it.  We can do this by adding up the null entries with sum(is.na()) and dividing it by the number of records.
+
+I'm going to select those variables that are complete and hold them in a separate table as I explore the data further and break it into more manageable chunks.  
+```{r}
+#create a function to find out what variables are completely filled in, suggesting these were required fields during data entry
+complete<-function(x) sum(is.na(x))==0
+
+#select those columns that are complete and hold as a separate table
+mo_complete<-MetObjects %>% 
+  select_if(.,complete)
+
+names(mo_complete)
+
+```
+
+
+
+And now a plot...Which departments are the largest? While we're at it, let's see how the public domain vs. non-public domain breaks down.
+
+```{r}
+library(forcats)
+pal<-brewer.pal(2, "RdBu")
+mo_complete %>%
+  group_by(department, is.public.domain) %>% 
+  count() %>% 
+  ggplot(aes(x=fct_reorder(department,n, decreasing=TRUE), y=n))+
+  geom_col(aes(fill=is.public.domain))+
+  labs(x="", y="number of objects", fill="is in\npublic domain")+
+  theme_bw()+
+  scale_fill_brewer(type = "qual",palette = 2,direction = -1)+
+  coord_flip()
+```
+
+Drawings and Prints is by far the largest department, containing a full 35% of the records in the MetObjects table.  
+
+Let's explore Drawings and Prints a bit more.  First, let's find out if there are any additional complete variables when we filter on department=="Drawings and Prints"
+
+```{r warning=FALSE, message=FALSE}
+d_and_p_complete<-mo_complete %>% filter(department == "Drawings and Prints") %>% distinct() %>% 
+  left_join(MetObjects) %>% 
+  select_if(.,complete)
+
+names(d_and_p_complete)[!names(d_and_p_complete) %in% names(mo_complete)]
+```
+
+Only one additional variable, classification, has complete data.
+
+To capture more data, we'll include any variable that is more than  75% complete:
+
+```{r}
+d_and_p_row_count<-nrow(d_and_p_complete)
+near_complete<-function(x) sum(!is.na(x))/nrow(d_and_p_complete) > 0.75
+
+d_and_p<-mo_complete %>% filter(department == "Drawings and Prints") %>% 
+  distinct() %>% 
+  left_join(MetObjects) %>% 
+  select_if(., near_complete)
+
+names(d_and_p)
+
+```
+
+I'd like to explore the media used to create the objects in  the Drawings and Prints department.  Unfortunately, the variable is filled with inconsistent or combined data, such as media and ground, color information, etc.  Using tidytext, we can find the most frequent words used to describe the media. We've stemmed the words to avoid variations such as "etched/etch/etching"
+
+First a table:
+```{r warning=FALSE, message=FALSE}
+library(tidytext)
+library(SnowballC)
+sw<-stop_words
+tidy_medium<-d_and_p %>% 
+  ungroup() %>% 
+  unnest_tokens(word, medium) %>% 
+  group_by(word) %>% 
+  summarise(freq=n()) %>%
+  ungroup() %>% 
+  anti_join(stop_words) %>% 
+  filter(!word %in% c("color", "black", "brown", "white", "green", "dark", "light", "commercial")) %>% 
+    arrange(desc(freq))
+
+
+head(tidy_medium, 10)
+```
+
+And then a wordcloud of the most frequent words describing the objects' media:
+
+```{r message=FALSE, warning=FALSE}
+library(wordcloud)
+
+tidy_medium %>% 
+  with(wordcloud(words = word, freq=freq, max.words=50, colors = brewer.pal(4, "RdBu")))
+
+
+```
+

@@ -1,0 +1,156 @@
+---
+title: Cleaning the Metropolitan Museum of Art
+author: ~
+date: '2017-12-26'
+slug: cleaning-the-metropolitan-museum-of-art
+categories: [cleaning, exploratory analysis]
+tags: []
+---
+
+
+
+<p>Recently, <a href="http://metmuseum.org">The Metropolitan Museum of Art</a> made its collection database publicly available. The collection spans over 5,000 years and has nearly a half-million records. Wonderful! Exciting!</p>
+<p>43 Variables, almost all of them text.</p>
+<pre class="r"><code>library(tidyverse)
+library(RColorBrewer)
+
+#read in the 227 MB file
+#trim the white space to avoid weird UTF/ASCII characters
+file_url&lt;-&quot;http://media.githubusercontent.com/media/metmuseum/openaccess/master/MetObjects.csv&quot;
+MetObjects&lt;-read_csv(file_url, trim_ws = T)
+
+#display the column names
+names(MetObjects)</code></pre>
+<pre><code>##  [1] &quot;Object Number&quot;           &quot;Is Highlight&quot;           
+##  [3] &quot;Is Public Domain&quot;        &quot;Object ID&quot;              
+##  [5] &quot;Department&quot;              &quot;Object Name&quot;            
+##  [7] &quot;Title&quot;                   &quot;Culture&quot;                
+##  [9] &quot;Period&quot;                  &quot;Dynasty&quot;                
+## [11] &quot;Reign&quot;                   &quot;Portfolio&quot;              
+## [13] &quot;Artist Role&quot;             &quot;Artist Prefix&quot;          
+## [15] &quot;Artist Display Name&quot;     &quot;Artist Display Bio&quot;     
+## [17] &quot;Artist Suffix&quot;           &quot;Artist Alpha Sort&quot;      
+## [19] &quot;Artist Nationality&quot;      &quot;Artist Begin Date&quot;      
+## [21] &quot;Artist End Date&quot;         &quot;Object Date&quot;            
+## [23] &quot;Object Begin Date&quot;       &quot;Object End Date&quot;        
+## [25] &quot;Medium&quot;                  &quot;Dimensions&quot;             
+## [27] &quot;Credit Line&quot;             &quot;Geography Type&quot;         
+## [29] &quot;City&quot;                    &quot;State&quot;                  
+## [31] &quot;County&quot;                  &quot;Country&quot;                
+## [33] &quot;Region&quot;                  &quot;Subregion&quot;              
+## [35] &quot;Locale&quot;                  &quot;Locus&quot;                  
+## [37] &quot;Excavation&quot;              &quot;River&quot;                  
+## [39] &quot;Classification&quot;          &quot;Rights and Reproduction&quot;
+## [41] &quot;Link Resource&quot;           &quot;Metadata Date&quot;          
+## [43] &quot;Repository&quot;</code></pre>
+<p>43 variables with “spacey” names.</p>
+<p>Before we go any further, we need to transform the names to valid, R-friendly variable names. I prefer to use lowercase for column names.</p>
+<pre class="r"><code>#use base &quot;make.names&quot; function on lowercase column names
+head(names(MetObjects)&lt;-make.names(tolower(names(MetObjects))),6)</code></pre>
+<pre><code>## [1] &quot;object.number&quot;    &quot;is.highlight&quot;     &quot;is.public.domain&quot;
+## [4] &quot;object.id&quot;        &quot;department&quot;       &quot;object.name&quot;</code></pre>
+<p>Now we can take a peek at what the data includes using dplyr’s glimpse(), just looking at the first 10 columns to save space</p>
+<pre class="r"><code>glimpse(MetObjects[,1:10],width = 50)</code></pre>
+<pre><code>## Observations: 458,614
+## Variables: 10
+## $ object.number    &lt;chr&gt; &quot;1979.486.1&quot;, &quot;1980....
+## $ is.highlight     &lt;chr&gt; &quot;False&quot;, &quot;False&quot;, &quot;F...
+## $ is.public.domain &lt;chr&gt; &quot;False&quot;, &quot;False&quot;, &quot;F...
+## $ object.id        &lt;int&gt; 1, 2, 3, 4, 5, 6, 7,...
+## $ department       &lt;chr&gt; &quot;American Decorative...
+## $ object.name      &lt;chr&gt; &quot;Coin&quot;, &quot;Coin&quot;, &quot;Coi...
+## $ title            &lt;chr&gt; &quot;One-dollar Liberty ...
+## $ culture          &lt;chr&gt; NA, NA, NA, NA, NA, ...
+## $ period           &lt;chr&gt; NA, NA, NA, NA, NA, ...
+## $ dynasty          &lt;chr&gt; NA, NA, NA, NA, NA, ...</code></pre>
+<p>There are quite a few NAs in several of the columns, so the next step would be to check the sparsity of each column and decide whether we can drop it. We can do this by adding up the null entries with sum(is.na()) and dividing it by the number of records.</p>
+<p>I’m going to select those variables that are complete and hold them in a separate table as I explore the data further and break it into more manageable chunks.</p>
+<pre class="r"><code>#create a function to find out what variables are completely filled in, suggesting these were required fields during data entry
+complete&lt;-function(x) sum(is.na(x))==0
+
+#select those columns that are complete and hold as a separate table
+mo_complete&lt;-MetObjects %&gt;% 
+  select_if(.,complete)
+
+names(mo_complete)</code></pre>
+<pre><code>##  [1] &quot;object.number&quot;     &quot;is.highlight&quot;      &quot;is.public.domain&quot; 
+##  [4] &quot;object.id&quot;         &quot;department&quot;        &quot;object.begin.date&quot;
+##  [7] &quot;object.end.date&quot;   &quot;link.resource&quot;     &quot;metadata.date&quot;    
+## [10] &quot;repository&quot;</code></pre>
+<p>And now a plot…Which departments are the largest? While we’re at it, let’s see how the public domain vs. non-public domain breaks down.</p>
+<pre class="r"><code>library(forcats)
+pal&lt;-brewer.pal(2, &quot;RdBu&quot;)</code></pre>
+<pre><code>## Warning in brewer.pal(2, &quot;RdBu&quot;): minimal value for n is 3, returning requested palette with 3 different levels</code></pre>
+<pre class="r"><code>mo_complete %&gt;%
+  group_by(department, is.public.domain) %&gt;% 
+  count() %&gt;% 
+  ggplot(aes(x=fct_reorder(department,n, decreasing=TRUE), y=n))+
+  geom_col(aes(fill=is.public.domain))+
+  labs(x=&quot;&quot;, y=&quot;number of objects&quot;, fill=&quot;is in\npublic domain&quot;)+
+  theme_bw()+
+  scale_fill_brewer(type = &quot;qual&quot;,palette = 2,direction = -1)+
+  coord_flip()</code></pre>
+<p><img src="/posts/2017-12-26-cleaning-the-metropolitan-museum-of-art_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Drawings and Prints is by far the largest department, containing a full 35% of the records in the MetObjects table.</p>
+<p>Let’s explore Drawings and Prints a bit more. First, let’s find out if there are any additional complete variables when we filter on department==“Drawings and Prints”</p>
+<pre class="r"><code>d_and_p_complete&lt;-mo_complete %&gt;% filter(department == &quot;Drawings and Prints&quot;) %&gt;% distinct() %&gt;% 
+  left_join(MetObjects) %&gt;% 
+  select_if(.,complete)
+
+names(d_and_p_complete)[!names(d_and_p_complete) %in% names(mo_complete)]</code></pre>
+<pre><code>## [1] &quot;classification&quot;</code></pre>
+<p>Only one additional variable, classification, has complete data.</p>
+<p>To capture more data, we’ll include any variable that is more than 75% complete:</p>
+<pre class="r"><code>d_and_p_row_count&lt;-nrow(d_and_p_complete)
+near_complete&lt;-function(x) sum(!is.na(x))/nrow(d_and_p_complete) &gt; 0.75
+
+d_and_p&lt;-mo_complete %&gt;% filter(department == &quot;Drawings and Prints&quot;) %&gt;% 
+  distinct() %&gt;% 
+  left_join(MetObjects) %&gt;% 
+  select_if(., near_complete)</code></pre>
+<pre><code>## Joining, by = c(&quot;object.number&quot;, &quot;is.highlight&quot;, &quot;is.public.domain&quot;, &quot;object.id&quot;, &quot;department&quot;, &quot;object.begin.date&quot;, &quot;object.end.date&quot;, &quot;link.resource&quot;, &quot;metadata.date&quot;, &quot;repository&quot;)</code></pre>
+<pre class="r"><code>names(d_and_p)</code></pre>
+<pre><code>##  [1] &quot;object.number&quot;       &quot;is.highlight&quot;        &quot;is.public.domain&quot;   
+##  [4] &quot;object.id&quot;           &quot;department&quot;          &quot;object.begin.date&quot;  
+##  [7] &quot;object.end.date&quot;     &quot;link.resource&quot;       &quot;metadata.date&quot;      
+## [10] &quot;repository&quot;          &quot;object.name&quot;         &quot;title&quot;              
+## [13] &quot;artist.role&quot;         &quot;artist.display.name&quot; &quot;artist.display.bio&quot; 
+## [16] &quot;artist.alpha.sort&quot;   &quot;artist.begin.date&quot;   &quot;artist.end.date&quot;    
+## [19] &quot;object.date&quot;         &quot;medium&quot;              &quot;dimensions&quot;         
+## [22] &quot;credit.line&quot;         &quot;classification&quot;</code></pre>
+<p>I’d like to explore the media used to create the objects in the Drawings and Prints department. Unfortunately, the variable is filled with inconsistent or combined data, such as media and ground, color information, etc. Using tidytext, we can find the most frequent words used to describe the media. We’ve stemmed the words to avoid variations such as “etched/etch/etching”</p>
+<p>First a table:</p>
+<pre class="r"><code>library(tidytext)
+library(SnowballC)
+sw&lt;-stop_words
+tidy_medium&lt;-d_and_p %&gt;% 
+  ungroup() %&gt;% 
+  unnest_tokens(word, medium) %&gt;% 
+  group_by(word) %&gt;% 
+  summarise(freq=n()) %&gt;%
+  ungroup() %&gt;% 
+  anti_join(stop_words) %&gt;% 
+  filter(!word %in% c(&quot;color&quot;, &quot;black&quot;, &quot;brown&quot;, &quot;white&quot;, &quot;green&quot;, &quot;dark&quot;, &quot;light&quot;, &quot;commercial&quot;)) %&gt;% 
+    arrange(desc(freq))
+
+
+head(tidy_medium, 10)</code></pre>
+<pre><code>## # A tibble: 10 x 2
+##          word  freq
+##         &lt;chr&gt; &lt;int&gt;
+##  1 lithograph 38028
+##  2    etching 36782
+##  3  engraving 26419
+##  4        ink 16801
+##  5        pen 11990
+##  6    albumen 11297
+##  7 photograph 11249
+##  8      paper  8281
+##  9   graphite  7767
+## 10    woodcut  6730</code></pre>
+<p>And then a wordcloud of the most frequent words describing the objects’ media:</p>
+<pre class="r"><code>library(wordcloud)
+
+tidy_medium %&gt;% 
+  with(wordcloud(words = word, freq=freq, max.words=50, colors = brewer.pal(4, &quot;RdBu&quot;)))</code></pre>
+<p><img src="/posts/2017-12-26-cleaning-the-metropolitan-museum-of-art_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
